@@ -19,9 +19,21 @@ Basicly, these are the steps I took:
 
 Running make should create the same image as I am. :-)
 
+compiling kernel
+================
+As far as I know I just checked out the tree from ynezz and build it by
+creating the configuration file on the normal way: 
+`make ARCH=arm ts72xx_defconfig`.  I had to enable the console to see
+something on `/dev/ttyAM0`.  `CONFIG_SERIAL_8250` and 
+`CONFIG_SERIAL_8250_CONSOLE` are enabled in my config.  Building the modules
+was done by simply run `make INSTALL_MOD_PATH=$(pwd)/../modules modules_install`
+which installed the modules in the ../modules directory.  I manually added the
+modules to my image.
+
 links
 =====
 * The ynezz repository which gave me the idea of building my own kernel:
   https://github.com/ynezz/linux-2.6
+
 * I've found a mirror of openwrt on hithub: https://github.com/mirrors/openwrt
   It will probably be usefull for further development.
