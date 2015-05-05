@@ -1,0 +1,91 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Ts7260-openwrt by wimpunk</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/respond.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!--[if lt IE 8]>
+    <link rel="stylesheet" href="stylesheets/ie.css">
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+      <div id="header">
+        <nav>
+          <li class="fork"><a href="https://github.com/wimpunk/ts7260-openwrt">View On GitHub</a></li>
+          <li class="downloads"><a href="https://github.com/wimpunk/ts7260-openwrt/zipball/master">ZIP</a></li>
+          <li class="downloads"><a href="https://github.com/wimpunk/ts7260-openwrt/tarball/master">TAR</a></li>
+          <li class="title">DOWNLOADS</li>
+        </nav>
+      </div><!-- end header -->
+
+    <div class="wrapper">
+
+      <section>
+        <div id="title">
+          <h1>Ts7260-openwrt</h1>
+          <p>Configuration files to build an openwrt image for ts7260</p>
+          <hr>
+          <span class="credits left">Project maintained by <a href="https://github.com/wimpunk">wimpunk</a></span>
+          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></span>
+        </div>
+
+        <h1>
+<a id="basic-information" class="anchor" href="#basic-information" aria-hidden="true"><span class="octicon octicon-link"></span></a>basic information</h1>
+
+<p>This repository contains my configuration for a ts7260 root filesystem.
+It's my goal to build a openwrt image with this configuration file which
+should work with the kernel based on the linux 2.6 kernel from ynezz</p>
+
+<h1>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>installation</h1>
+
+<p>Basicly, these are the steps I took:</p>
+
+<ol>
+<li><p><code>svn co svn://svn.openwrt.org/openwrt/trunk/ openwrt</code> which was the command 
+I found on <a href="https://dev.openwrt.org/wiki/GetSource">https://dev.openwrt.org/wiki/GetSource</a>. I used the trunk version 
+because the current 10.03.1 has no ep93xx support.</p></li>
+<li><p>Create an env directory and initiate the git repository.  This can also be
+done by running <code>scripts/env list</code></p></li>
+<li><p>Clone this repository into your env directory.</p></li>
+</ol>
+
+<p>Running make should create the same image as I am. :-)</p>
+
+<h1>
+<a id="compiling-kernel" class="anchor" href="#compiling-kernel" aria-hidden="true"><span class="octicon octicon-link"></span></a>compiling kernel</h1>
+
+<p>As far as I know I just checked out the tree from ynezz and build it by
+creating the configuration file on the normal way: 
+<code>make ARCH=arm ts72xx_defconfig</code>.  I had to enable the console to see
+something on <code>/dev/ttyAM0</code>.  <code>CONFIG_SERIAL_8250</code> and 
+<code>CONFIG_SERIAL_8250_CONSOLE</code> are enabled in my config.  Building the modules
+was done by simply run <code>make INSTALL_MOD_PATH=$(pwd)/../modules modules_install</code>
+which installed the modules in the ../modules directory.  I manually added the
+modules to my image.</p>
+
+<h1>
+<a id="links" class="anchor" href="#links" aria-hidden="true"><span class="octicon octicon-link"></span></a>links</h1>
+
+<ul>
+<li>The <a href="https://github.com/ynezz/linux-2.6">ynezz repository</a> which gave me 
+the idea of building my own kernel</li>
+<li>I've found <a href="https://github.com/mirrors/openwrt">a mirror of openwrt on hithub</a>
+It will probably be usefull for further development.</li>
+</ul>
+      </section>
+
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
